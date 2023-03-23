@@ -1,39 +1,41 @@
 import pygame
-from pygame. constants import QUIT
+from pygame.constants import QUIT
+import random
 
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
-
+BLUE = 0, 191, 255
+YELLOW = 255, 255, 0
 
 pygame.init()
 
-screen = width, heigth = 800, 600
-
-print(screen)
-
+screen = width, height = 800, 600
 main_surface = pygame.display.set_mode(screen)
-
-is_working = True
 
 ball = pygame.Surface((20, 20))
 ball.fill((WHITE))
-bal_rect = ball.get_rect()
+ball_rect = ball.get_rect()
 ball_speed = [1, 1]
+
+is_working = True
 
 while is_working:
     for event in pygame.event.get():
         if event.type == QUIT:
             is_working = False
 
-    bal_rect = bal_rect.move(ball_speed)
+    ball_rect = ball_rect.move(ball_speed)
 
-    if bal_rect.bottom >= heigth or bal_rect.top <= 0:
+    if ball_rect.bottom >= height or ball_rect.top <= 0:
         ball_speed[1] = -ball_speed[1]
+        ball.fill((YELLOW)) 
+
+    if ball_rect.right >= width or ball_rect.left <= 0:
+        ball_speed[0] = -ball_speed[0]
+        ball.fill((BLUE)) 
 
     main_surface.fill((BLACK))
+    main_surface.blit(ball, ball_rect)
 
-    main_surface.blit(ball, bal_rect)
-
-    # main_surface.fill((255, 155, 200))
- 
     pygame.display.flip()
+
