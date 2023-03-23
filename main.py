@@ -22,6 +22,8 @@ while is_working:
             is_working = False
 
     bal_rect = bal_rect.move(ball_speed)
+    main_surface.fill((0, 0, 0))
+
     main_surface.blit(ball, bal_rect)
 
     # main_surface.fill((255, 155, 200))
