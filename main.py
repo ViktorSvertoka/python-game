@@ -1,6 +1,10 @@
 import pygame
 from pygame. constants import QUIT
 
+BLACK = 0, 0, 0
+WHITE = 255, 255, 255
+
+
 pygame.init()
 
 screen = width, heigth = 800, 600
@@ -12,7 +16,7 @@ main_surface = pygame.display.set_mode(screen)
 is_working = True
 
 ball = pygame.Surface((20, 20))
-ball.fill((255, 255, 255))
+ball.fill((WHITE))
 bal_rect = ball.get_rect()
 ball_speed = [1, 1]
 
@@ -22,7 +26,11 @@ while is_working:
             is_working = False
 
     bal_rect = bal_rect.move(ball_speed)
-    main_surface.fill((0, 0, 0))
+
+    if bal_rect.bottom >= heigth or bal_rect.top <= 0:
+        ball_speed[1] = -ball_speed[1]
+
+    main_surface.fill((BLACK))
 
     main_surface.blit(ball, bal_rect)
 
