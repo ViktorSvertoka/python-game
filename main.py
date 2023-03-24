@@ -58,6 +58,8 @@ while is_working:
         enemy[1] = enemy[1].move(-enemy[2], 0)
         main_surface.blit(enemy[0], enemy[1])
 
+        if enemy[1].left < 0:
+            enemies.pop(enemies.index(enemy))
 
     if pressed_keys[K_DOWN]:
         ball_rect = ball_rect.move(0, ball_speed)
@@ -70,6 +72,8 @@ while is_working:
 
     if pressed_keys[K_LEFT]:
         ball_rect = ball_rect.move(-ball_speed, 0)
+
+    print(len(enemies))
 
 
     pygame.display.flip()
