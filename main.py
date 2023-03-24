@@ -25,6 +25,10 @@ def create_enemy():
     enemy_speed = 1
     return enemy, enemy_rect, enemy_speed
 
+CREATE_ENEMY = pygame.USEREVENT + 1
+pygame.time.set_timer(CREATE_ENEMY, 1500)
+
+
 
 enemies = []
 
@@ -36,6 +40,9 @@ while is_working:
         if event.type == QUIT:
             is_working = False
 
+        if event.type == CREATE_ENEMY:
+            enemies.append(create_enemy())  
+
     enemies.append(create_enemy())
 
     pressed_keys  = pygame.key.get_pressed()
@@ -43,7 +50,9 @@ while is_working:
     main_surface.fill((BLACK))
 
     main_surface.blit(ball, ball_rect)
-    main_surface.blit(enemy, enemy_rect)
+
+    for enemy in enemies:
+        main_surface.blit(enemy, enemy_rect)
 
 
     if pressed_keys[K_DOWN]:
