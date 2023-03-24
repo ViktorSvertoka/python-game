@@ -1,3 +1,5 @@
+# Mini game
+
 ```
 
 pip3 install pygame --- установка библиотеки
