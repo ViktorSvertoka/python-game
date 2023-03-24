@@ -37,7 +37,7 @@ enemies = []
 def create_bonus():
     bonus = pygame.Surface((20, 20))
     bonus.fill(GREEN)
-    bonus_rect = pygame.Rect(height, random.randint(0, width), *bonus.get_size())
+    bonus_rect = pygame.Rect(random.randint(0, width), -height, *bonus.get_size())
     bonus_speed = random.randint(2, 5)
     return [bonus, bonus_rect, bonus_speed]
 
@@ -81,10 +81,10 @@ while is_working:
 
 
     for bonus in bonuses:
-        bonus[1] = bonus[1].move(-bonus[2], 0)
+        bonus[1] = bonus[1].move(0, bonus[2])
         main_surface.blit(bonus[0], bonus[1])
 
-        if bonus[1].left < 0:
+        if bonus[1].top > height:
             bonuses.pop(bonuses.index(bonus))
 
         if ball_rect.colliderect(bonus[1]):
