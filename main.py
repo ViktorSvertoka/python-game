@@ -22,7 +22,7 @@ main_surface = pygame.display.set_mode(screen)
 # player.fill(WHITE)
 player = pygame.image.load("player.png").convert_alpha()
 player_rect = player.get_rect()
-player_speed = 5
+player_speed = 10
 
 bg = pygame.transform.scale(pygame.image.load("background.png").convert(), screen)
 bgx = 0
