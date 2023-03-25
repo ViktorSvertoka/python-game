@@ -31,8 +31,9 @@ bg_speed = 3
 
 
 def create_enemy():
-    enemy = pygame.Surface((20, 20))
-    enemy.fill(RED)
+    # enemy = pygame.Surface((20, 20))
+    # enemy.fill(RED)
+    enemy = pygame.image.load("enemy.png").convert_alpha()
     enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
     enemy_speed = random.randint(2, 5)
     return [enemy, enemy_rect, enemy_speed]
@@ -45,8 +46,9 @@ enemies = []
 
 
 def create_bonus():
-    bonus = pygame.Surface((20, 20))
-    bonus.fill(GREEN)
+    # bonus = pygame.Surface((20, 20))
+    # bonus.fill(GREEN)
+    bonus = pygame.image.load("bonus.png").convert_alpha()
     bonus_rect = pygame.Rect(random.randint(0, width), -height, *bonus.get_size())
     bonus_speed = random.randint(2, 5)
     return [bonus, bonus_rect, bonus_speed]
