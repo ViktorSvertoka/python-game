@@ -18,8 +18,6 @@ font = pygame.font.SysFont("Verdana", 20)
 
 main_surface = pygame.display.set_mode(screen)
 
-# player = pygame.Surface((20, 20))
-# player.fill(WHITE)
 player = pygame.image.load("player.png").convert_alpha()
 player_rect = player.get_rect()
 player_speed = 10
@@ -32,7 +30,7 @@ bg_speed = 3
 
 def create_enemy():
     enemy = pygame.image.load("enemy.png").convert_alpha()
-    enemy_new_size = (100, 50)
+    enemy_new_size = (100, 35)
     enemy_resized = pygame.transform.scale(enemy, enemy_new_size)
     enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
     enemy_speed = random.randint(2, 5)
@@ -46,12 +44,12 @@ enemies = []
 
 
 def create_bonus():
-    # bonus = pygame.Surface((20, 20))
-    # bonus.fill(GREEN)
     bonus = pygame.image.load("bonus.png").convert_alpha()
+    bonus_new_size = (90, 150)
+    bonus_resized = pygame.transform.scale(bonus, bonus_new_size)
     bonus_rect = pygame.Rect(random.randint(0, width), -height, *bonus.get_size())
     bonus_speed = random.randint(2, 5)
-    return [bonus, bonus_rect, bonus_speed]
+    return [bonus_resized, bonus_rect, bonus_speed]
 
 
 CREATE_BONUS = pygame.USEREVENT + 2
@@ -78,10 +76,6 @@ while is_working:
             bonuses.append(create_bonus())
 
     pressed_keys = pygame.key.get_pressed()
-
-    # main_surface.fill(BLACK)
-
-    # main_surface.blit(bg, (0, 0))
 
     bgx -= bg_speed
     bgx2 -= bg_speed
