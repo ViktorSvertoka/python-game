@@ -104,7 +104,5 @@ while is_working:
            ball_rect = ball_rect.move(-ball_speed, 0)
 
 
-    print(len(enemies))
-
     pygame.display.flip()
 
