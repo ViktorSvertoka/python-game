@@ -41,7 +41,7 @@ def create_bonus():
     bonus_speed = random.randint(2, 5)
     return [bonus, bonus_rect, bonus_speed]
 
-CREATE_BONUS = pygame.USEREVENT + 1
+CREATE_BONUS = pygame.USEREVENT + 2
 pygame.time.set_timer(CREATE_BONUS, 1500)
 
 bonuses = []
