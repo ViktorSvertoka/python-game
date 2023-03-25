@@ -19,7 +19,7 @@ font = pygame.font.SysFont("Verdana", 20)
 
 main_surface = pygame.display.set_mode(screen)
 
-IMGS_PATH = "./goose"
+IMGS_PATH = "goose"
 
 
 def create_player():
@@ -27,15 +27,15 @@ def create_player():
         pygame.image.load(IMGS_PATH + "/" + file).convert_alpha()
         for file in listdir(IMGS_PATH)
     ]
-    player = player_imgs[0]
+
     player_new_size = (90, 35)
-    player_resized = pygame.transform.scale(player, player_new_size)
-    player_rect = player.get_rect()
+    player_resized = pygame.transform.scale(player_imgs[0], player_new_size)
+    player_rect = player_resized.get_rect()
     player_speed = 10
-    return player, player_imgs, player_resized, player_rect, player_speed
+    return player_imgs, player_resized, player_rect, player_speed
 
 
-player, player_imgs, player_resized, player_rect, player_speed = create_player()
+player_imgs, player_resized, player_rect, player_speed = create_player()
 
 CHANGE_IMG = pygame.USEREVENT + 3
 pygame.time.set_timer(CHANGE_IMG, 125)
@@ -101,7 +101,6 @@ while is_working:
             img_index += 1
             if img_index == len(player_imgs):
                 img_index = 0
-            player = player_imgs[img_index]
 
     pressed_keys = pygame.key.get_pressed()
 
@@ -117,7 +116,7 @@ while is_working:
     main_surface.blit(bg, (bgx, 0))
     main_surface.blit(bg, (bgx2, 0))
 
-    main_surface.blit(player_resized, player_rect)
+    main_surface.blit(player_imgs[img_index], player_rect)
 
     main_surface.blit(font.render(str(scores), True, BLACK), (width - 30, 0))
 
