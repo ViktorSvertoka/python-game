@@ -7,7 +7,7 @@ pygame.init()
 
 FPS = pygame.time.Clock()
 
-screen = width, height = 800, 600
+screen = width, height = 1200, 800
 
 BLACK = 0, 0, 0
 WHITE = 255, 255, 255
@@ -18,18 +18,29 @@ font = pygame.font.SysFont("Verdana", 20)
 
 main_surface = pygame.display.set_mode(screen)
 
-player = pygame.image.load("player.png").convert_alpha()
-player_rect = player.get_rect()
-player_speed = 10
 
-bg = pygame.transform.scale(pygame.image.load("background.png").convert(), screen)
+def create_player():
+    player = pygame.image.load("./images/player.png").convert_alpha()
+    player_new_size = (90, 35)
+    player_resized = pygame.transform.scale(player, player_new_size)
+    player_rect = player.get_rect()
+    player_speed = 10
+    return player_resized, player_rect, player_speed
+
+
+player_resized, player_rect, player_speed = create_player()
+
+
+bg = pygame.transform.scale(
+    pygame.image.load("./images/background.png").convert(), screen
+)
 bgx = 0
 bgx2 = bg.get_width()
 bg_speed = 3
 
 
 def create_enemy():
-    enemy = pygame.image.load("enemy.png").convert_alpha()
+    enemy = pygame.image.load("./images/enemy.png").convert_alpha()
     enemy_new_size = (100, 35)
     enemy_resized = pygame.transform.scale(enemy, enemy_new_size)
     enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
@@ -44,7 +55,7 @@ enemies = []
 
 
 def create_bonus():
-    bonus = pygame.image.load("bonus.png").convert_alpha()
+    bonus = pygame.image.load("./images/bonus.png").convert_alpha()
     bonus_new_size = (90, 150)
     bonus_resized = pygame.transform.scale(bonus, bonus_new_size)
     bonus_rect = pygame.Rect(random.randint(0, width), -height, *bonus.get_size())
@@ -89,9 +100,9 @@ while is_working:
     main_surface.blit(bg, (bgx, 0))
     main_surface.blit(bg, (bgx2, 0))
 
-    main_surface.blit(player, player_rect)
+    main_surface.blit(player_resized, player_rect)
 
-    main_surface.blit(font.render(str(scores), True, WHITE), (width - 30, 0))
+    main_surface.blit(font.render(str(scores), True, BLACK), (width - 30, 0))
 
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
