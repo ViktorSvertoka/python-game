@@ -84,7 +84,7 @@ while is_working:
         if enemy[1].left < 0:
             enemies.pop(enemies.index(enemy))
 
-        if ball_rect.colliderect(enemy[1]):
+        if player_rect.colliderect(enemy[1]):
             is_working = False
 
     for bonus in bonuses:
@@ -94,7 +94,7 @@ while is_working:
         if bonus[1].top > height:
             bonuses.pop(bonuses.index(bonus))
 
-        if ball_rect.colliderect(bonus[1]):
+        if player_rect.colliderect(bonus[1]):
             bonuses.pop(bonuses.index(bonus))
             scores += 1
 
