@@ -18,10 +18,16 @@ font = pygame.font.SysFont("Verdana", 20)
 
 main_surface = pygame.display.set_mode(screen)
 
-player = pygame.Surface((20, 20))
-player.fill(WHITE)
+# player = pygame.Surface((20, 20))
+# player.fill(WHITE)
+player = pygame.image.load("player.png").convert_alpha()
 player_rect = player.get_rect()
 player_speed = 5
+
+bg = pygame.transform.scale(pygame.image.load("background.png").convert(), screen)
+bgx = 0
+bgx2 = bg.get_width()
+bg_speed = 3
 
 
 def create_enemy():
@@ -71,7 +77,21 @@ while is_working:
 
     pressed_keys = pygame.key.get_pressed()
 
-    main_surface.fill(BLACK)
+    # main_surface.fill(BLACK)
+
+    # main_surface.blit(bg, (0, 0))
+
+    bgx -= bg_speed
+    bgx2 -= bg_speed
+
+    if bgx < -bg.get_width():
+        bgx = bg.get_width()
+
+    if bgx2 < -bg.get_width():
+        bgx2 = bg.get_width()
+
+    main_surface.blit(bg, (bgx, 0))
+    main_surface.blit(bg, (bgx2, 0))
 
     main_surface.blit(player, player_rect)
 
