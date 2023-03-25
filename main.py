@@ -31,12 +31,12 @@ bg_speed = 3
 
 
 def create_enemy():
-    # enemy = pygame.Surface((20, 20))
-    # enemy.fill(RED)
     enemy = pygame.image.load("enemy.png").convert_alpha()
+    enemy_new_size = (100, 50)
+    enemy_resized = pygame.transform.scale(enemy, enemy_new_size)
     enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
     enemy_speed = random.randint(2, 5)
-    return [enemy, enemy_rect, enemy_speed]
+    return [enemy_resized, enemy_rect, enemy_speed]
 
 
 CREATE_ENEMY = pygame.USEREVENT + 1
