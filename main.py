@@ -14,6 +14,8 @@ WHITE = 255, 255, 255
 RED = 255, 0, 0
 GREEN = 0, 255, 0
 
+font = pygame.font.SysFont("Verdana", 20)
+
 main_surface = pygame.display.set_mode(screen)
 
 ball = pygame.Surface((20, 20))
@@ -21,12 +23,14 @@ ball.fill(WHITE)
 ball_rect = ball.get_rect()
 ball_speed = 5
 
+
 def create_enemy():
     enemy = pygame.Surface((20, 20))
     enemy.fill(RED)
     enemy_rect = pygame.Rect(width, random.randint(0, height), *enemy.get_size())
     enemy_speed = random.randint(2, 5)
     return [enemy, enemy_rect, enemy_speed]
+
 
 CREATE_ENEMY = pygame.USEREVENT + 1
 pygame.time.set_timer(CREATE_ENEMY, 1500)
@@ -41,15 +45,18 @@ def create_bonus():
     bonus_speed = random.randint(2, 5)
     return [bonus, bonus_rect, bonus_speed]
 
+
 CREATE_BONUS = pygame.USEREVENT + 2
-pygame.time.set_timer(CREATE_BONUS, 1500)
+pygame.time.set_timer(CREATE_BONUS, 2500)
+
+scores = 0
 
 bonuses = []
 
 is_working = True
 
 while is_working:
- 
+
     FPS.tick(60)
 
     for event in pygame.event.get():
@@ -60,14 +67,15 @@ while is_working:
             enemies.append(create_enemy())
 
         if event.type == CREATE_BONUS:
-            bonuses.append(create_bonus())    
-
+            bonuses.append(create_bonus())
 
     pressed_keys = pygame.key.get_pressed()
 
     main_surface.fill(BLACK)
 
     main_surface.blit(ball, ball_rect)
+
+    main_surface.blit(font.render(str(scores), True, WHITE), (width - 30, 0))
 
     for enemy in enemies:
         enemy[1] = enemy[1].move(-enemy[2], 0)
@@ -77,8 +85,7 @@ while is_working:
             enemies.pop(enemies.index(enemy))
 
         if ball_rect.colliderect(enemy[1]):
-            enemies.pop(enemies.index(enemy))
-
+            is_working = False
 
     for bonus in bonuses:
         bonus[1] = bonus[1].move(0, bonus[2])
@@ -89,20 +96,18 @@ while is_working:
 
         if ball_rect.colliderect(bonus[1]):
             bonuses.pop(bonuses.index(bonus))
-
+            scores += 1
 
         if pressed_keys[K_DOWN] and ball_rect.bottom < height:
-           ball_rect = ball_rect.move(0, ball_speed)
+            ball_rect = ball_rect.move(0, ball_speed)
 
         if pressed_keys[K_UP] and ball_rect.top > 0:
-           ball_rect = ball_rect.move(0, -ball_speed)
+            ball_rect = ball_rect.move(0, -ball_speed)
 
         if pressed_keys[K_RIGHT] and ball_rect.right < width:
-           ball_rect = ball_rect.move(ball_speed, 0)
+            ball_rect = ball_rect.move(ball_speed, 0)
 
         if pressed_keys[K_LEFT] and ball_rect.left > 0:
-           ball_rect = ball_rect.move(-ball_speed, 0)
-
+            ball_rect = ball_rect.move(-ball_speed, 0)
 
     pygame.display.flip()
-
