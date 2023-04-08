@@ -1,4 +1,4 @@
-# Mini game
+# Python Mini Game
 
 ```
 
