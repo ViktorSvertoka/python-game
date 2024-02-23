@@ -2,8 +2,8 @@
 
 ```
 
-pip3 install pygame --- установка библиотеки
+pip3 install pygame --- встановлення бібліотеки
 
-python3 main.py --- вывод в консоль
+python3 main.py --- вивід у консоль
 
 ```
